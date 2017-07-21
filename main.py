@@ -4,6 +4,8 @@ import game
 import locations
 import weapons
 import armour
+import augments
+
 def interface(location):
     while location.getPlayer().isAlive() and any(location.inhabList()):
         for char in location.inhabList()+[location.getPlayer()]:
@@ -20,7 +22,9 @@ if __name__ == "__main__":
     location.addInhab(character)
     location.addInhab(char2)
     stick = weapons.Weapon(name="stick", damage={'sides':4,'num':2})
-    jerkin = armour.Armour(name="jerkin", aRating = 2, aClass = "torso")
+    jerkin = armour.Armour(name="jerkin", aRating = 2, armClass = "torso")
+    roboArm = augments.Augment(name="Robotic Arm", mod={'str': 500, 'agi':500, 'con': 0}, augClass='muscle')
     player.equip(stick)
     player.equip(jerkin)
+    player.equip(roboArm)
     interface(location)

@@ -4,11 +4,15 @@ import weapons
 
 class Character(Game):
 
-    def __init__(self, name, location, attr = None, armour = None, weapon = None):
+    def __init__(self, name, location, attr = None, armour = None, weapon = None, augments = None, statMods = None):
         if attr == None: self._attr = {'str': 3, 'con': 3, 'agi': 3}
         else: self._attr = attr
         if armour == None: self._armour = {'head': None, 'torso': None, 'legs': None}
         else: self._armour = armour
+        if augments == None: self._augments = {'muscle': None, 'cognitive': None, 'Bone': None, 'metabolic': None}
+        else: self.augments = augments
+        if statMods == None: self._statMods = {'str': 0, 'con': 0, 'agi': 0}
+        else: self._statMods = statMods
         self._weapon = weapon
         self._name = name
         self._health = self.MaxHealth()
@@ -17,10 +21,10 @@ class Character(Game):
         self._location = location
 
     def getAttr(self, specAttr):
-        return self._attr[specAttr]
+        return self._attr[specAttr] + self._statMods[specAttr]
 
     def getAttrMod(self, specAttr):
-        return int(self._attr[specAttr]/3)
+        return int(self._attr[specAttr] + self._statMods[specAttr]/3)
 
     def setAttr(self, specAttr, val):
         self._attr[specAttr] = val
@@ -38,9 +42,37 @@ class Character(Game):
         return defense
 
     def equip(self, item):
-        if item.getType() == "Weapon": self._weapon = item
-        elif item.getType() == "Armour": self._armour[item.getArmourClass()] = item
+        itemType = item.getType()
+        if itemType == "Weapon":
+            if self._weapon != None: self.unequip(self._weapon)
+            self._weapon = item
+        elif itemType == "Armour":
+            if self._armour[item.getArmourClass()] != None: self.unequip(self._armour[item.getArmourClass()])
+            self._armour[item.getArmourClass()] = item
+        elif itemType == "Augment":
+            if self._augments[item.getAugClass()] != None: self.unequip(self._augments[item.getAugClass()])
+            self._augments[item.getAugClass()] = item
+            self.addModifiers(item.getModifiers())
         else: print("Cannot Equip")
+
+    def addModifiers(self, modifiers):
+        for stat in list(self._statMods.keys()):
+            self._statMods[stat] += modifiers[stat]
+
+    def unequip(self, item):
+        itemType = item.getType()
+        if itemType == "Weapon":
+            self._weapon = None
+        elif itemType == "Armour":
+            self._armour[item.getArmourClass()] = None
+        elif itemType == "Augment":
+            self._augments[item.getAugClass()] = None
+            self.removeModifiers(item.getModifiers())
+        else: print("No such equipment")
+
+    def removeModifiers(self, modifiers):
+        for stat in list(self._statMods.keys()):
+            self._statMods[stat] -= modifiers[stat]
 
     def getLoc(self):
         return self._location
