@@ -15,7 +15,7 @@ if __name__ == "__main__":
     location = locations.Location()
     character = characters.Character("Steve", location)
     char2 = characters.Character("Mitch", location)
-    player = player.Player("Jim", location, attr = {'str': 3, 'con':12})
+    player = player.Player("Jim", location)
     location.addPlayer(player)
     location.addInhab(character)
     location.addInhab(char2)
