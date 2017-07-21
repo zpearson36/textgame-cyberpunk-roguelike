@@ -3,7 +3,7 @@ import characters
 import game
 import locations
 import weapons
-
+import armour
 def interface(location):
     while location.getPlayer().isAlive() and any(location.inhabList()):
         for char in location.inhabList()+[location.getPlayer()]:
@@ -20,5 +20,7 @@ if __name__ == "__main__":
     location.addInhab(character)
     location.addInhab(char2)
     stick = weapons.Weapon(name="stick", damage={'sides':4,'num':2})
+    jerkin = armour.Armour(name="jerkin", aRating = 2, aClass = "torso")
     player.equip(stick)
+    player.equip(jerkin)
     interface(location)

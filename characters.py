@@ -33,14 +33,13 @@ class Character(Game):
         for armour in list(self._armour.values()):
             if armour == None:
                 defense += 0
+            else:
+                defense += armour.getRating()
         return defense
-
-    def setArmourRating(self, val):
-        self._armourRating = val
 
     def equip(self, item):
         if item.getType() == "Weapon": self._weapon = item
-        elif item.getType() == "Armour": self._armour[item.getClass()] = item
+        elif item.getType() == "Armour": self._armour[item.getArmourClass()] = item
         else: print("Cannot Equip")
 
     def getLoc(self):
