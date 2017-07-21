@@ -6,7 +6,7 @@ class Character(Game):
     def __init__(self, name, location, attr = None, armour = None):
         if attr == None: self._attr = {'str': 1, 'con': 1, 'agi': 1}
         else: self._attr = attr
-        if armour = None: self._armour = {'head': None, 'torso': None, 'legs': None}
+        if armour == None: self._armour = {'head': None, 'torso': None, 'legs': None}
         else: self._armour = armour
         self._name = name
         self._health = self.MaxHealth()
@@ -53,6 +53,9 @@ class Character(Game):
         print("%s: %d" % (self._name, self._health))
         if self._health <= 0:
             self._alive = False
+
+    def getAction(self):
+        self.hit(self.getLoc().getPlayer())
 
     def hit(self, target):
         selfRoll = Dice.roll(20,1) + self.getAttrMod('agi')

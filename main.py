@@ -7,8 +7,7 @@ def interface(location):
     while location.getPlayer().isAlive() and any(location.inhabList()):
         for char in location.inhabList()+[location.getPlayer()]:
             if not char.isAlive(): continue
-            elif char.isPlayer(): char.getAction()
-            else: char.hit(location.getPlayer())
+            char.getAction()
     print("Done!")
 
 if __name__ == "__main__":
