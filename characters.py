@@ -3,9 +3,11 @@ from rng import Dice
 
 class Character(Game):
 
-    def __init__(self, name, location, attr = None):
+    def __init__(self, name, location, attr = None, armour = None):
         if attr == None: self._attr = {'str': 1, 'con': 1, 'agi': 1}
         else: self._attr = attr
+        if armour = None: self._armour = {'head': None, 'torso': None, 'legs': None}
+        else: self._armour = armour
         self._name = name
         self._health = self.MaxHealth()
         self._alive = True
@@ -23,6 +25,16 @@ class Character(Game):
 
     def MaxHealth(self):
         return 3+self.getAttrMod('con')
+
+    def getArmourRating(self):
+        defense = 0
+        for armour in list(self._armour.values()):
+            if armour == None:
+                defense += 0
+        return defense
+
+    def setArmourRating(self, val):
+        self._armourRating = val
 
     def getLoc(self):
         return self._location
@@ -46,7 +58,8 @@ class Character(Game):
         selfRoll = Dice.roll(20,1) + self.getAttrMod('agi')
         oppRoll = Dice.roll(20,1) + target.getAttrMod('agi')
         if selfRoll >= oppRoll:
-            dmg = 1+self.getAttrMod('str')
+            dmg = 1+self.getAttrMod('str') - target.getArmourRating()
+            if dmg < 0: dmg = 0
             print("%s hits %s for %d point(s) of damage" % (self.getName(), target.getName(), dmg))
             target.decrHealth(dmg)
         else: print("%s misses %s" % (self.getName(), target.getName()))
