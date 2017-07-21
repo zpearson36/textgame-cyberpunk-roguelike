@@ -13,6 +13,9 @@ class Location:
     def addPlayer(self, player):
         self._inhabs["Player"] = player
 
+    def getPlayer(self):
+        return self._inhabs["Player"]
+
     def getInhab(self, name):
         if name in self._inhabs:
             return self._inhabs[name]
@@ -20,6 +23,9 @@ class Location:
             print("No such inhabitant")
             return "N/A"
 
-    def listInhabs(self):
+    def displayInhabs(self):
         for char in list(self._inhabs.keys()):
             if char != "Player": print(char)
+
+    def inhabList(self):
+        return list(self._inhabs.values())

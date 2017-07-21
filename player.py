@@ -6,6 +6,7 @@ class Player(Character):
     def __init__(self, name, location):
         Character.__init__(self, name)
         self._location = location
+        self._isPlayer = True
 
     def getAction(self):
         act = input("What DO").split()
@@ -23,7 +24,7 @@ class Player(Character):
     def hit(self, name = ''):
         if name == '':
             print('Who would you like to hit?')
-            self.getLoc().listInhabs()
+            self.getLoc().displayInhabs()
             stopLoop = False
             while not stopLoop:
                 targetName = input().lower()
