@@ -134,6 +134,7 @@ class Character(Game):
         else: return self._weapon.getDamage(self)
 
     def hit(self, target):
+        dmg = 0
         if self._actPoints >= 2:
             target.getLock().acquire()
             self.reduceAP(2)
@@ -142,10 +143,11 @@ class Character(Game):
             if selfRoll >= oppRoll:
                 dmg = self.getDmg() - target.getArmourRating()
                 if dmg < 0: dmg = 0
-                #print("%s hits %s for %d point(s) of damage" % (self.getName(), target.getName(), dmg))
+                print("%s hits %s for %d point(s) of damage" % (self.getName(), target.getName(), dmg))
                 target.decrHealth(dmg)
-            #else: print("%s misses %s" % (self.getName(), target.getName()))
+            else: print("%s misses %s" % (self.getName(), target.getName()))
             target.getLock().release()
+        return dmg
 
     def __bool__(self):
         return self._alive

@@ -40,4 +40,5 @@ class Player(Character):
             target = self.getLoc().getInhab(name)
             if target != "N/A": stopLoop = True
             else: name = ''
-        super().hit(target)
+        print(super().hit(target))
+        target.updateDisposition('Player', -31*super().hit(target))
