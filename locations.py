@@ -11,10 +11,10 @@ class Location:
         self._inhabs[character.getName().lower()] = character
 
     def addPlayer(self, player):
-        self._inhabs["Player"] = player
+        self._player = player
 
     def getPlayer(self):
-        return self._inhabs["Player"]
+        return self._player
 
     def getInhab(self, name):
         if name in self._inhabs:

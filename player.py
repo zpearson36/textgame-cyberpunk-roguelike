@@ -4,30 +4,31 @@ import locations
 class Player(Character):
 
     def __init__(self, name, location):
-        Character.__init__(self, name)
-        self._location = location
+        Character.__init__(self, name, location)
         self._isPlayer = True
 
     def getAction(self):
-        act = input("What DO").split()
-        try:
-            method = getattr(self,act[0])
-        except AttributeError:
-            print("Not a valid action")
-            return False
-        method()
-        return True
+        stopLoop = False
+        while not stopLoop:
+            act = input().split()
+            if len(act) > 1: arg = act[1]
+            else: arg = ''
+            try:
+                method = getattr(self,act[0])
+                stopLoop = True
+            except AttributeError:
+                print("Not a valid action")
+        method(arg)
 
-    def getLoc(self):
-        return self._location
 
     def hit(self, name = ''):
-        if name == '':
-            print('Who would you like to hit?')
-            self.getLoc().displayInhabs()
-            stopLoop = False
-            while not stopLoop:
-                targetName = input().lower()
-                target = self.getLoc().getInhab(targetName)
-                if target != "N/A": stopLoop = True
-            super(Player, self).hit(target)
+        stopLoop = False
+        while not stopLoop:
+            if name == '':
+                print('Who would you like to hit?')
+                self.getLoc().displayInhabs()
+                name = input().lower()
+            target = self.getLoc().getInhab(name)
+            if target != "N/A": stopLoop = True
+            else: name = ''
+        super(Player, self).hit(target)
