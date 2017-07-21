@@ -4,7 +4,7 @@ import locations
 class Player(Character):
 
     def __init__(self, name, location):
-        Character.__init__(self, name, location)
+        super().__init__(name, location)
         self._isPlayer = True
 
     def getAction(self):
@@ -18,7 +18,8 @@ class Player(Character):
                 stopLoop = True
             except AttributeError:
                 print("Not a valid action")
-        method(arg)
+        if arg == '': method()
+        else: method(arg)
 
 
     def hit(self, name = ''):
@@ -31,4 +32,4 @@ class Player(Character):
             target = self.getLoc().getInhab(name)
             if target != "N/A": stopLoop = True
             else: name = ''
-        super(Player, self).hit(target)
+        super().hit(target)

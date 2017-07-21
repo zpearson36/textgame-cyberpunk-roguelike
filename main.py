@@ -19,4 +19,5 @@ if __name__ == "__main__":
     location.addPlayer(player)
     location.addInhab(character)
     location.addInhab(char2)
+    player.setAttr('str', 12)
     interface(location)

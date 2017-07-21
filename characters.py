@@ -2,12 +2,23 @@ from game import Game
 
 class Character(Game):
 
-    def __init__(self, name, location):
+    def __init__(self, name, location, attr = None):
+        if attr == None: self._attr = {'str': 1}
+        else: self._attr = attr
         self._name = name
         self._health = 5
         self._alive = True
         self._isPlayer = False
         self._location = location
+
+    def getAttr(self, specAttr):
+        return self._attr[specAttr]
+
+    def getAttrMod(self, specAttr):
+        return int(self._attr[specAttr]/3)
+
+    def setAttr(self, specAttr, val):
+        self._attr[specAttr] = val
 
     def getLoc(self):
         return self._location
@@ -28,7 +39,7 @@ class Character(Game):
             self._alive = False
 
     def hit(self, target):
-        target.decrHealth(2)
+        target.decrHealth(1+self.getAttrMod('str'))
 
     def __bool__(self):
         return self._alive
