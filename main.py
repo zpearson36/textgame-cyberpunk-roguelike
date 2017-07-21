@@ -2,6 +2,7 @@ import player
 import characters
 import game
 import locations
+import weapons
 
 def interface(location):
     while location.getPlayer().isAlive() and any(location.inhabList()):
@@ -18,4 +19,6 @@ if __name__ == "__main__":
     location.addPlayer(player)
     location.addInhab(character)
     location.addInhab(char2)
+    stick = weapons.Weapon(name="stick", damage={'sides':4,'num':2})
+    player.equip(stick)
     interface(location)

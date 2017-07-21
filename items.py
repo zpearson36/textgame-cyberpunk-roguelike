@@ -1,4 +1,4 @@
-class Items:
+class Item:
     def __init__(self, name='', itemType=None, weight = 0, value=0):
         self._name = name
         self._type = itemType
