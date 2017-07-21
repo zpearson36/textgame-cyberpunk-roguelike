@@ -3,8 +3,8 @@ import locations
 
 class Player(Character):
 
-    def __init__(self, name, location):
-        super().__init__(name, location)
+    def __init__(self, name, location, attr = None):
+        super().__init__(name, location, attr)
         self._isPlayer = True
 
     def getAction(self):

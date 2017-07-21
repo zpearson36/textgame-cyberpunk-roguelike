@@ -3,10 +3,10 @@ from game import Game
 class Character(Game):
 
     def __init__(self, name, location, attr = None):
-        if attr == None: self._attr = {'str': 1}
+        if attr == None: self._attr = {'str': 1, 'con': 1}
         else: self._attr = attr
         self._name = name
-        self._health = 5
+        self._health = self.MaxHealth()
         self._alive = True
         self._isPlayer = False
         self._location = location
@@ -19,6 +19,9 @@ class Character(Game):
 
     def setAttr(self, specAttr, val):
         self._attr[specAttr] = val
+
+    def MaxHealth(self):
+        return 3+self.getAttrMod('con')
 
     def getLoc(self):
         return self._location
