@@ -24,7 +24,7 @@ class Character(Game):
         return self._attr[specAttr] + self._statMods[specAttr]
 
     def getAttrMod(self, specAttr):
-        return int(self._attr[specAttr] + self._statMods[specAttr]/3)
+        return int((self._attr[specAttr] + self._statMods[specAttr]))/2 - 2
 
     def setAttr(self, specAttr, val):
         self._attr[specAttr] = val
