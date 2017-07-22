@@ -4,7 +4,7 @@ class NPC(Character):
 
     def __init__(self, name, location, attr = None, armour = None, weapon = None, augments = None, statMods = None, disposition=None, hostile = False):
         super().__init__(name=name, location=location, attr = attr, armour = armour, weapon = weapon, augments = augments, statMods = statMods)
-        if self._disposition == None: self._disposition = {'Player': 50}
+        if disposition == None: self._disposition = {'Player': 50}
         else: self._disposition = disposition
         self._hostile = hostile
 
@@ -28,3 +28,6 @@ class NPC(Character):
             if self.isHostile(): self.hit(self.getLoc().getPlayer())
             time.sleep(.5)
             self.replenishAP()
+
+    def greeting(self):
+        print("Hello, my name is %s" % (self.getName()))

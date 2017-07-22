@@ -7,6 +7,7 @@ import armour
 import augments
 import threading
 import npc
+import time
 
 def interface(location):
     for char in location.inhabList()+[location.getPlayer()]:
@@ -29,12 +30,10 @@ if __name__ == "__main__":
     location.addPlayer(player)
     location.addInhab(character)
     location.addInhab(char2)
-    '''
-    stick = weapons.Weapon(name="stick", damage={'sides':4,'num':2})
+    #stick = weapons.Weapon(name="stick", damage={'sides':4,'num':2})
     jerkin = armour.Armour(name="jerkin", aRating = 20, armClass = "torso")
-    roboArm = augments.Augment(name="Robotic Arm", mod={'str': 500, 'agi':500, 'con': 0}, augClass='muscle')
-    player.equip(stick)
+    #roboArm = augments.Augment(name="Robotic Arm", mod={'str': 500, 'agi':500, 'con': 0}, augClass='muscle')
+    #player.equip(stick)
     player.equip(jerkin)
-    player.equip(roboArm)
-    '''
+    #player.equip(roboArm)
     interface(location)

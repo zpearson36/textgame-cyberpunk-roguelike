@@ -1,4 +1,5 @@
 from characters import Character
+from dialogue import Dialogue
 import locations
 import time
 class Player(Character):
@@ -40,5 +41,16 @@ class Player(Character):
             target = self.getLoc().getInhab(name)
             if target != "N/A": stopLoop = True
             else: name = ''
-        print(super().hit(target))
         target.updateDisposition('Player', -31*super().hit(target))
+
+    def talk(self, name = ''):
+        stopLoop = False
+        while not stopLoop:
+            if name == '':
+                print('Who would you like to talk to?')
+                self.getLoc().displayInhabs()
+                name = input().lower()
+            target = self.getLoc().getInhab(name)
+            if target != "N/A": stopLoop = True
+            else: name = ''
+        Dialogue.converse(self, target)

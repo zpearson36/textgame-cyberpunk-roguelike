@@ -3,8 +3,6 @@ import threading
 import time
 import characters
 class Game:
-    def __init__(self):
-        self._running = True
 
     def exit(self):
         print("Exiting...")
